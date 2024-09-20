@@ -107,5 +107,36 @@ $(document).ready(function() {
     });
 });
 
+// 확대/축소 방지 코드
+document.addEventListener('wheel', function(event) {
+    if (event.ctrlKey) {
+        event.preventDefault();
+    }
+}, { passive: false });
+
+document.addEventListener('keydown', function(event) {
+    if (event.ctrlKey && (event.key === '+' || event.key === '-' || event.key === '0')) {
+        event.preventDefault();
+    }
+});
+
+// 페이지 로드 시 기본 배율로 설정
+document.body.style.zoom = "100%"; // 일부 브라우저에서 배율을 강제 설정
+
+$('a[href="#"]').click(function(event) {
+    event.preventDefault();
+});
+
+$('.lnb a').click(function(event) {
+    event.preventDefault(); // 기본 동작 막기 (필요에 따라 제거 가능)
+    
+    // 모든 a 태그에서 on 클래스 제거
+    $('.lnb a').removeClass('on');
+    
+    // 클릭한 a 태그에 on 클래스 추가
+    $(this).addClass('on');
+});
+
+
 
 
